@@ -16,12 +16,12 @@ oauth_url: str = None
 def gateway_endpoint():
     global api_url
     if not api_url:
-        outputs = get_pulumi_stack_outputs("organization/foundry-examples/dev")
+        outputs = get_pulumi_stack_outputs("organization/greet/local")
         log.info(f"outputs: {outputs}")
         
         # Retrieve the rest-api-id and rest-api-host using .apply() to extract their values
-        api_id = outputs.get("test-api-id", None)
-        host = outputs.get("test-api-host", None)
+        api_id = outputs.get("greet-api-id", None)
+        host = outputs.get("greet-api-host", None)
         log.info(f"host: {host}")
         api_url = f"https://{api_id}.{host}"
     return api_url
@@ -31,12 +31,12 @@ def oauth_endpoint():
     global oauth_url
     if not oauth_url:
         # Use Pulumi's StackReference to reference the 'simple-oauth-server/dev' stack
-        outputs = get_pulumi_stack_outputs("organization/simple-oauth-server/dev")
+        outputs = get_pulumi_stack_outputs("organization/simple-oauth-server/local")
         log.info(f"outputs: {outputs}")
         
         # Retrieve the rest-api-id and rest-api-host using .apply() to extract their values
-        api_id = outputs.get("rest-api-id", None)
-        host = outputs.get("rest-api-host", None)
+        api_id = outputs.get("oauth-rest-api-id", None)
+        host = outputs.get("oauth-rest-api-host", None)
         # Return the OAuth endpoint URL as a string (use .apply() to create the final URL)
         oauth_url = f"https://{api_id}.{host}"
     return oauth_url

@@ -1,10 +1,10 @@
-name: foundry-examples
+name: greet
 runtime:
   name: python
   options:
     toolchain: pip
     virtualenv: venv
-description: Test deployment
+description: Simple greeting as a rest api
 config:
   pulumi:tags:
     value:
